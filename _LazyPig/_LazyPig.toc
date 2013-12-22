@@ -1,0 +1,6 @@
+## Interface: 11200
+## SavedVariables: LPCONFIG, LPMULTIBOX
+## Title: _LazyPig v4.70
+## Notes: UI Enhancements
+LazyPig.xml
+LazyPigMenu.xml

@@ -1,0 +1,8 @@
+<Bindings>
+	<Binding name="LOGOUT"  header="LP_HEADER">Logout();</Binding>
+	<Binding name="UNSTUCK"  header="LP_HEADER">Stuck();</Binding>
+	<Binding name="RELOAD"  header="LP_HEADER">ReloadUI();</Binding>
+	<Binding name="DUEL"  header="LP_HEADER">LazyPig_Duel_EFC();</Binding>
+	<Binding name="WSGDROP"  header="LP_HEADER">LazyPig_DropWSGFlag_NoggBuff();</Binding>
+	<Binding name="MENU"  header="LP_HEADER">LazyPig_Command();</Binding>
+</Bindings>

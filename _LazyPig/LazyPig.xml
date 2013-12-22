@@ -1,0 +1,47 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="LazyPig.lua"/>
+	<Frame name="LazyPig">	
+		<Scripts>
+			<OnLoad>
+				LazyPig_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				 LazyPig_OnEvent(event);
+			</OnEvent>
+			<OnUpdate>
+				LazyPig_OnUpdate();
+			</OnUpdate>
+		</Scripts>
+		<Anchors>
+			<Anchor point="TOP" relativeTo="PVPArenaTextString" relativePoint="BOTTOM" />
+		</Anchors>
+		<Size>
+			<AbsDimension x="256" y="256"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">		
+				<FontString name="LazyPigText" font="Fonts\FRIZQT__.TTF" outline="THICK" hidden="true">
+					<Size>
+						<AbsDimension x="512" y="0"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset><AbsDimension x="-50" y="90"/></Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14"/>
+					</FontHeight>
+				</FontString>	
+			</Layer>
+		</Layers>
+	</Frame>
+	<GameTooltip name="LazyPig_Buff_Tooltip" hidden="true" inherits="GameTooltipTemplate">
+		<Scripts>
+			<OnLoad>
+				this:SetOwner(this, "ANCHOR_NONE");
+			</OnLoad>
+		</Scripts>
+	</GameTooltip>
+</Ui>

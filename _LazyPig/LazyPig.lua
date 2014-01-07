@@ -1,5 +1,7 @@
 LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, SUMM = true, EBG = true, LBG = true, QBG = false, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = false, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false}
 
+LP_VERSION = "5.00" --UPDATE THIS MANUALLY! This is NOT used, but hey, it's at top
+
 BINDING_HEADER_LP_HEADER = "_LazyPig";
 BINDING_NAME_LOGOUT = "Logout";
 BINDING_NAME_UNSTUCK = "Unstuck";
@@ -80,42 +82,41 @@ ScheduleSplit.count = {}
 
 local LazyPigMenuObjects = {}
 local LazyPigMenuStrings = {
-		[00]= "NEED",
-		[01]= "GREED",
-		[02]= "PASS",
-		[10]= "NEED",
-		[11]= "GREED",
-		[12]= "PASS",
-		[20]= "DUNGEON",
-		[21]= "RAID",
-		[22]= "BATTLEGROUND",
-		[23]= "MUTE PERMANENTLY",
-		[30]= "GUILDMATES",
-		[31]= "FRIENDS",
-		[32]= "STRANGERS",
-		[40]= "SHOW FRIENDS",
-		[41]= "SHOW ENEMIES",
-		[42]= "HIDE IF UNCHECKED",
-		[50]= "ENTER BG",
-		[51]= "LEAVE BG",
-		[52]= "QUEUE BG",
-		[60]= "ALWAYS",
-		[61]= "WARRIOR SHIELD/DRUID BEAR",
-		[90]= "SUMMON AUTO ACCEPT",
-		[91]= "LOOT WINDOW AUTO POSITION",
-		[92]= "IMPROVED RIGHT CLICK",
-		[93]= "EASY SPLIT/MERGE(SHIFT+RIGHT CLICK)",
-		[94]= "EXTENDED CAMERA DISTANCE",
-		[95]= "SPECIAL KEY COMBINATIONS",
-		[96]= "DUEL AUTO DECLINE(PRESS SHIFT TO BYPASS)",
-		[97]= "INSTANCE RESURRECTION ACCEPT OOC",
-		[98]= "GOSSIP AUTO PROCESSING",
-		[99]= "CHARACTER AUTO SAVE",
-		[100]= "AUTO DISMOUNT",
-		[101]= "CHAT SPAM FILTER",
-		[102]= "BLOCK BG QUEST SHARING"
+		[00]= "Need",
+		[01]= "Greed",
+		[02]= "Pass",
+		[10]= "Need",
+		[11]= "Greed",
+		[12]= "Pass",
+		[20]= "Dungeon",
+		[21]= "Raid",
+		[22]= "Battleground",
+		[23]= "Mute Permanently",
+		[30]= "GuildMates",
+		[31]= "Friends",
+		[32]= "Strangers",
+		[40]= "Show Friends",
+		[41]= "Show Enemies",
+		[42]= "Hide if Unchecked",
+		[50]= "Enter BattleGround",
+		[51]= "Leave BattleGround",
+		[52]= "Queue BattleGround",
+		[60]= "Always",
+		[61]= "Warrior Shield/Druid Bear",
+		[90]= "Summon Auto Accept",
+		[91]= "Loot Window Auto Position",
+		[92]= "Improved Right Click",
+		[93]= "Easy Split/Merge (Shift+Right_Click)",
+		[94]= "Extended Camera Distance",
+		[95]= "Special Key Combinations",
+		[96]= "Duel Auto Decline (Shift to ByPass)",
+		[97]= "Instance Resurrection Accept OOC",
+		[98]= "Gossip Auto Processing",
+		[99]= "Character Auto-Save",
+		[100]= "Auto Dismount",
+		[101]= "Chat Spam Filter",
+		[102]= "Block Battleground Quest Sharing"
 }
-
 
 function LazyPig_OnLoad()
 	SelectGossipActiveQuest = LazyPig_SelectGossipActiveQuest;
@@ -133,17 +134,22 @@ function LazyPig_OnLoad()
 	SLASH_LAZYPIG2 = "/lazypig";
 	SlashCmdList["LAZYPIG"] = LazyPig_Command;
 	
-	this:RegisterEvent("PLAYER_ENTERING_WORLD")
+	this:RegisterEvent("ADDON_LOADED");
+	this:RegisterEvent("PLAYER_LOGIN")
+	--this:RegisterEvent("PLAYER_ENTERING_WORLD")
 end
 
 function LazyPig_Command()
-	if LazyPigOptions:IsShown() then
-		LazyPigOptions:Hide();
+	if LazyPigOptionsFrame:IsShown() then
+		LazyPigOptionsFrame:Hide()
+		LazyPigKeybindsFrame:Hide()
 	else
-		LazyPigOptions:Show();
+		LazyPigOptionsFrame:Show()
+		if getglobal("LazyPigOptionsFrameKeibindsButton"):GetText() == "Hide Keybinds" then
+			LazyPigKeybindsFrame:Show()
+		end
 	end	
 end
-
 
 function LazyPig_OnUpdate()
 	local current_time = GetTime();
@@ -185,8 +191,7 @@ function LazyPig_OnUpdate()
 	elseif battleframe then
 		battleframe = nil
 	end
-		
-		
+			
 	if LPCONFIG.SPECIALKEY then
 		if ctrlstatus and shiftstatus and altstatus and current_time > delayaction then
 			delayaction = current_time + 1
@@ -334,9 +339,16 @@ function ScheduleFunctionLaunch(func, delay)
 	end
 end
 
-function LazyPig_OnEvent(event)	  
-	if (event == "PLAYER_ENTERING_WORLD") then
-		this:UnregisterEvent("PLAYER_ENTERING_WORLD")
+function LazyPig_OnEvent(event)
+	if (event == "ADDON_LOADED") and (arg1 == "_LazyPig") then
+		local LP_TITLE = GetAddOnMetadata("_LazyPig", "Title")
+		local LP_VERSION = GetAddOnMetadata("_LazyPig", "Version")
+		local LP_AUTHOR = GetAddOnMetadata("_LazyPig", "Author")
+		
+		DEFAULT_CHAT_FRAME:AddMessage(LP_TITLE .. " v" .. LP_VERSION .. " by " .."|cff6969FF".. LP_AUTHOR .."|cffffffff".. " loaded, type".."|cff00ff00".." /lp".."|cffffffff for options")
+	elseif (event == "PLAYER_LOGIN") then
+	--if (event == "PLAYER_ENTERING_WORLD") then
+	--	this:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		this:RegisterEvent("CHAT_MSG")
 		this:RegisterEvent("CHAT_MSG_SYSTEM")
 		this:RegisterEvent("PARTY_INVITE_REQUEST")
@@ -372,7 +384,9 @@ function LazyPig_OnEvent(event)
 		this:RegisterEvent("UNIT_INVENTORY_CHANGED")
 		this:RegisterEvent("UI_INFO_MESSAGE")
 		
-		
+		LazyPigOptionsFrame = LazyPig_CreateOptionsFrame()
+		LazyPigKeybindsFrame = LazyPig_CreateKeybindsFrame()
+
 		LazyPig_CheckSalvation();
 		Check_Bg_Status();
 		LazyPig_AutoLeaveBG();
@@ -382,6 +396,8 @@ function LazyPig_OnEvent(event)
 		ScheduleFunctionLaunch(LazyPig_RefreshNameplates, 0.25);
 		MailtoCheck();
 		
+		
+
 		if LPCONFIG.CAM then SetCVar("cameraDistanceMax",50) end
 		if LPCONFIG.LOOT then UIPanelWindows["LootFrame"] = nil end
 		QuestRecord["index"] = 0
@@ -389,9 +405,7 @@ function LazyPig_OnEvent(event)
 		--TargetUnit("player")
 		--SendChatMessage(".xp 8", "SAY") --qgaming version
 		--SendChatMessage(".exp 5", "SAY") --scriptcraft version
-		
-		DEFAULT_CHAT_FRAME:AddMessage("_LazyPig by Ogrisch loaded type".."|cff00ff00".." /lp".."|cffffffff or click "..LazyPig_CreateLink("Hyperlink", 1, GREEN).." for options")
-		
+
 	elseif (LPCONFIG.SALVA and (event == "PLAYER_AURAS_CHANGED" or event == "UPDATE_BONUS_ACTIONBAR" and LazyPig_PlayerClass("Druid", "player") or event == "UNIT_INVENTORY_CHANGED")) then
 		LazyPig_CheckSalvation()
 		
@@ -602,8 +616,8 @@ function LazyPig_OnEvent(event)
 	end
 	--DEFAULT_CHAT_FRAME:AddMessage(event);	
 end
- 
- function LazyPig_StaticPopup_OnShow()
+
+function LazyPig_StaticPopup_OnShow()
 	if this.which == "QUEST_ACCEPT" and LazyPig_BG() and LPCONFIG.SBG then
 		DEFAULT_CHAT_FRAME:AddMessage("Quest Share Blocked");
 		this:Hide()
@@ -611,8 +625,7 @@ end
 	else
 		Original_StaticPopup_OnShow()
 	end	
- end
- 
+end
  
 function MailtoCheck(msg) 
 	if MailTo_Option then -- to avoid conflicts with mailto addon
@@ -993,7 +1006,6 @@ function LazyPig_SelectAvailableQuest(index, norecord)
 	Original_SelectAvailableQuest(index);
 end
 
-
 function LazyPig_FixQuest(quest, annouce)
 	if not QuestRecord["details"] then
 		annouce = true
@@ -1131,7 +1143,6 @@ function LazyPig_DropWSGFlag_NoggBuff()
 		counter = counter + 1
 	end
 end
-
 
 function LazyPig_Raid()
 	local t = GetRealZoneText()
@@ -1353,9 +1364,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 				ClearCursor()
 			end
 			return
-		
-		
-		
+			
 		elseif LPCONFIG.RIGHT and GMailFrame and GMailFrame:IsVisible() and not CursorHasItem() then
 			local i
 			local bag, item = ParentID,ItemID
@@ -1401,6 +1410,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 					end
 				end
 			end
+
 		elseif LPCONFIG.RIGHT and mailstatus and not IsShiftKeyDown() and not IsAltKeyDown() then
 			if InboxFrame and InboxFrame:IsVisible() then
 				MailFrameTab_OnClick(2);
@@ -1414,6 +1424,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 				end
 				return
 			end	
+
 		elseif LPCONFIG.RIGHT and auctionstatus and not IsShiftKeyDown() and not IsAltKeyDown() then
 			if not AuctionFrameAuctions:IsVisible() then
 				AuctionFrameTab3:Click()
@@ -1476,7 +1487,6 @@ function ScheduleItemSplit(sbag, sslot, dbag, dslot, count)
 				SplitContainerItem(ScheduleSplit.sbag[number], ScheduleSplit.sslot[number], ScheduleSplit.count[number])
 				PickupContainerItem(ScheduleSplit.dbag[number], ScheduleSplit.dslot[number])
 				ScheduleSplitCount[number] = nil
-				
 			end
 		else
 			ScheduleSplit.active = nil
@@ -1746,7 +1756,7 @@ function LazyPig_RollLootOpen()
 	return nil
 end
 
- function LazyPig_BindLootOpen()
+function LazyPig_BindLootOpen()
 	for i=1,STATICPOPUP_NUMDIALOGS do
 		local frame = getglobal("StaticPopup"..i)
 		if frame:IsShown() and frame.which == "LOOT_BIND" then
@@ -1805,7 +1815,6 @@ function LazyPig_ZoneCheck()
 		end
 	end	
 end
-
 
 function LazyPig_PlayerClass(class, unit)
 	if class then
@@ -1875,11 +1884,24 @@ function LazyPig_CheckSalvation()
 	end
 end
 
-function LazyPig_ShowBindings(bind, fonstring, name, desc)
+function LazyPig_ShowBindings(bind, fs, desc)
 	local bind1, bind2 = GetBindingKey(bind)
-	desc = bind1 or bind2 or desc or ""
-	name = name or bind or ""
-	getglobal(fonstring):SetText(name..":  "..desc);
+	local fsl = getglobal(fs)
+
+	local printout = nil
+	if bind1 and bind2 then
+		printout = "[" .. bind1 .. "/" .. bind2 .. "]"
+	elseif bind1 then
+		printout = "[" .. bind1 .. "]"
+	elseif bind2 then
+		printout = "[" .. bind2 .. "]"
+	elseif desc then
+		printout = "[" .. desc .. "]"
+	else
+		printout = "none"
+		fsl:SetTextColor(1,1,1,1) 
+	end
+	fsl:SetText(printout)
 end
 
 function LazyPig_ChatFrame_OnEvent(event)
@@ -1977,17 +1999,3 @@ function LazyPig_Duel_EFC()
 		end
 	end	
 end
-
-
-function lptest()
-	local keyenter = not tradestatus and not mailstatus and not auctionstatus and GetTime() > delayaction and GetTime() > (tradedelay + 0.5)
-	
-	if mailstatus then
-		DEFAULT_CHAT_FRAME:AddMessage("mail")
-	elseif tradestatus then
-		DEFAULT_CHAT_FRAME:AddMessage("trade")
-	elseif auctionstatus then
-		DEFAULT_CHAT_FRAME:AddMessage("auction")
-	end
-end
-

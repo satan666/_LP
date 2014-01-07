@@ -1,6 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 	<Script file="LazyPig.lua"/>
+	<Script file="LazyPigMenu.lua"/>
+	<Script file="LazyPigKeybindsFrame.lua"/>
 	<Frame name="LazyPig">	
 		<Scripts>
 			<OnLoad>
@@ -31,7 +33,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 						</Anchor>
 					</Anchors>
 					<FontHeight>
-						<AbsValue val="14"/>
+						<AbsValue val="18"/>
 					</FontHeight>
 				</FontString>	
 			</Layer>

@@ -34,6 +34,12 @@ local CheckBoxTables = {
 		[2] = { "LazyPigCheckbox61", "Warrior Shield/Druid Bear" },
 	},
 	
+	["Intelligent Battle Shout Remover"] = {
+		[0] = "LazyPigCheckboxGroupBattleShoutRemover",
+		[1] = { "LazyPigCheckbox70", "Always" },
+		[2] = { "LazyPigCheckbox71", "Sometimes" },
+	},
+	
 	["Nameplates Display Rules"] = {
 		[0] = "LazyPigCheckboxGroupNameplates",
 		[1] = { "LazyPigCheckbox40", "Show Friends" },
@@ -128,7 +134,7 @@ function LazyPig_CreateOptionsFrame()
 	frame:SetScale(.81)
 
 	frame:SetWidth(480)
-	frame:SetHeight(380)
+	frame:SetHeight(410)
 	
 	frame:SetPoint("TOPLEFT", nil, "TOPLEFT", 250, -50)
 	frame:SetBackdrop( {
@@ -231,12 +237,15 @@ function LazyPig_CreateOptionsFrame()
 	
 	local str = "Intelligent Salvation Remover"
 	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -45, str, CheckBoxTables[str])
+	
+	local str = "Intelligent Battle Shout Remover"
+	frame.cbgroup_battleshoutremover = CheckBoxGroup(frame, 250, -90, str, CheckBoxTables[str])
 
 	local str = "Group Invite Accept Rules"
-	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 250, -90, str, CheckBoxTables[str])
+	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 250, -135, str, CheckBoxTables[str])
 
 	local str = "Single Choise Rules"
-	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -150, str, CheckBoxTables[str])
+	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -195, str, CheckBoxTables[str])
 
 	return frame
 

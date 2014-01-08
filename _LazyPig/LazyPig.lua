@@ -1,4 +1,4 @@
-LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, SUMM = true, EBG = true, LBG = true, QBG = false, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = false, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false}
+LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, SUMM = true, EBG = true, LBG = true, QBG = false, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = false, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false, BSR = false}
 
 LP_VERSION = "5.00" --UPDATE THIS MANUALLY! This is NOT used, but hey, it's at top
 
@@ -103,6 +103,8 @@ local LazyPigMenuStrings = {
 		[52]= "Queue BattleGround",
 		[60]= "Always",
 		[61]= "Warrior Shield/Druid Bear",
+		[70]= "Always",
+		[71]= "Sometimes",
 		[90]= "Summon Auto Accept",
 		[91]= "Loot Window Auto Position",
 		[92]= "Improved Right Click",
@@ -299,6 +301,7 @@ function LazyPig_OnUpdate()
 	end
 	
 	LazyPig_CheckSalvation();
+	LazyPig_CheckBattleShout();
 	ScheduleButtonClick();
 	ScheduleFunctionLaunch();
 	ScheduleItemSplit();
@@ -388,6 +391,7 @@ function LazyPig_OnEvent(event)
 		LazyPigKeybindsFrame = LazyPig_CreateKeybindsFrame()
 
 		LazyPig_CheckSalvation();
+		LazyPig_CheckBattleShout();
 		Check_Bg_Status();
 		LazyPig_AutoLeaveBG();
 		LazyPig_AutoSummon();
@@ -408,6 +412,9 @@ function LazyPig_OnEvent(event)
 
 	elseif (LPCONFIG.SALVA and (event == "PLAYER_AURAS_CHANGED" or event == "UPDATE_BONUS_ACTIONBAR" and LazyPig_PlayerClass("Druid", "player") or event == "UNIT_INVENTORY_CHANGED")) then
 		LazyPig_CheckSalvation()
+		
+	elseif (LPCONFIG.BSR and (event == "PLAYER_AURAS_CHANGED")) then
+		LazyPig_CheckBattleShout()
 		
 	elseif(event == "DUEL_REQUESTED") then
 		duel_active = true
@@ -1551,6 +1558,8 @@ function LazyPig_GetOption(num)
 	or num == 52 and LPCONFIG.QBG
 	or num == 60 and LPCONFIG.SALVA == 1
 	or num == 61 and LPCONFIG.SALVA == 2
+	or num == 70 and LPCONFIG.BSR == 1
+	or num == 71 and LPCONFIG.BSR == 2
 	or num == 90 and LPCONFIG.SUMM
 	or num == 91 and LPCONFIG.LOOT
 	or num == 92 and LPCONFIG.RIGHT
@@ -1695,6 +1704,16 @@ function LazyPig_SetOption(num)
 		if not checked then LPCONFIG.SALVA = nil end
 		LazyPigMenuObjects[60]:SetChecked(nil)
 		LazyPig_CheckSalvation()
+	elseif num == 70 then
+		LPCONFIG.BSR = 1
+		if not checked then LPCONFIG.BSR = nil end
+		LazyPigMenuObjects[71]:SetChecked(nil)
+		LazyPig_CheckBattleShout()
+	elseif num == 71 then 
+		LPCONFIG.BSR = 2
+		if not checked then LPCONFIG.BSR = nil end
+		LazyPigMenuObjects[70]:SetChecked(nil)
+		LazyPig_CheckBattleShout()
 	elseif num == 90 then
 		LPCONFIG.SUMM = true
 		if not checked then LPCONFIG.SUMM = nil end	
@@ -1881,6 +1900,34 @@ end
 function LazyPig_CheckSalvation()
 	if(LPCONFIG.SALVA == 1 or LPCONFIG.SALVA == 2 and (LazyPig_IsShieldEquipped() and LazyPig_PlayerClass("Warrior", "player") or LazyPig_IsBearForm())) then
 		LazyPig_CancelSalvationBuff()
+	end
+end
+
+function LazyPig_CancelBattleShoutBuff()
+	local buff = {"Ability_Warrior_BattleShout"}
+	local counter = 0
+	while GetPlayerBuff(counter) >= 0 do
+		local index, untilCancelled = GetPlayerBuff(counter)
+		if untilCancelled ~= 1 then
+			local i =1
+			while buff[i] do
+				if string.find(GetPlayerBuffTexture(index), buff[i]) then
+					CancelPlayerBuff(index);
+					UIErrorsFrame:Clear();
+					UIErrorsFrame:AddMessage("Battle Shout Removed");
+					return
+				end
+				i = i + 1
+			end	
+		end
+		counter = counter + 1
+	end
+	return nil
+end
+
+function LazyPig_CheckBattleShout()
+	if(LPCONFIG.BSR == 1 or LPCONFIG.BSR == 2 and (LazyPig_PlayerClass("Warrior", "player") == false and LazyPig_PlayerClass("Rogue", "player") == false)) then
+		LazyPig_CancelBattleShoutBuff()
 	end
 end
 

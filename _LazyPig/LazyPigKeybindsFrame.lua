@@ -9,10 +9,10 @@ local FontstringTables = {
 	["Special Key-Combination Bindings"] = {
 		[0] = "LazyPigSKCB",
 		[1] = { "LazyPig_kbfs010", "Follow:", "CTRL-SHIFT" },
-		[2] = { "LazyPig_kbfs011", "Inspect/Bid Auction:", "ALT-SHIFT" },
+		[2] = { "LazyPig_kbfs011", "Inspect Player/Bid Auction:", "ALT-SHIFT" },
 		[3] = { "LazyPig_kbfs012", "Send Mail/Create Auction:", "CTRL-ALT" },
 		[4] = { "LazyPig_kbfs013", "Confirm Popup/Buy Auction:", "CTRL-ALT" },
-		[5] = { "LazyPig_kbfs014", "Initiate/Accept Trade:", "CTRL-ALT" },
+		[5] = { "LazyPig_kbfs014", "Initiate-Accept Trade:", "CTRL-ALT" },
 	},
 
 	["Configurable Key Bindings"] = {
@@ -20,8 +20,8 @@ local FontstringTables = {
 		[1] = { "LazyPig_kbfs020", "Logout:", "" },
 		[2] = { "LazyPig_kbfs021", "Unstuck", "" },
 		[3] = { "LazyPig_kbfs022", "Reload UI:", "" },
-		[4] = { "LazyPig_kbfs023", "Target WSG EnemyFlagCarrier", "" },
-		[5] = { "LazyPig_kbfs024", "Drop WSG Flag", "" },
+		[4] = { "LazyPig_kbfs023", "Target WSG EFC/Duel Request-Cancel", "" },
+		[5] = { "LazyPig_kbfs024", "Drop WSG Flag/Remove Slow Fall Buff", "" },
 	},
 }
 

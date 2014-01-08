@@ -48,8 +48,8 @@ local CheckBoxTables = {
 		[3] = { "LazyPigCheckbox32", "Strangers" }
 	},
 
-	["Single Choise Rules"] = {
-		[0] = "LazyPigCheckboxGroupSingleChoise",
+	["Single Choice Rules"] = {
+		[0] = "LazyPigCheckboxGroupSingleChoice",
 		[1] = { "LazyPigCheckbox90", "Summon Auto Accept", "If checked summons will be accepted before they expire" },
 		[2] = { "LazyPigCheckbox91", "Loot Window Auto Position", "Position the loot window under the mouse-cursor"},
 		[3] = { "LazyPigCheckbox92", "Improved Right Click", "Right Click to Drag and Drop Items into Mail, Trade, Auction Frames " },
@@ -58,10 +58,10 @@ local CheckBoxTables = {
 		[6] = { "LazyPigCheckbox95", "Special Key Combinations", "Activate the Special-Key-Combinations" },
 		[7] = { "LazyPigCheckbox96", "Duel Auto Decline (Shift to ByPass)" },
 		[8] = { "LazyPigCheckbox97", "Instance Resurrection Accept OOC", "Auto Accept Resurrection if OutOfCombat" },
-		[9] = { "LazyPigCheckbox98", "Gossip Auto Processing", "Skip Gossip-Windows-Choises from Innkeepers and FlyMasters" },
+		[9] = { "LazyPigCheckbox98", "Gossip Auto Processing", "Skip Gossip-Windows-Choices from Innkeepers and FlyMasters" },
 		[10] = { "LazyPigCheckbox99", "Character Auto-Save", "Use the .save command when....when?" },
 		[11] = { "LazyPigCheckbox100", "Auto Dismount", "Auto-Dismount when it's required by another action" },
-		[12] = { "LazyPigCheckbox101", "Chat Spam Filter" },
+		[12] = { "LazyPigCheckbox101", "Chat Spam Filter", "One minute ban for identical messages" },
 		[13] = { "LazyPigCheckbox102", "Block Battleground Quest Sharing", "Really? No more 'Stable' spam?" }
 	},
 }
@@ -235,7 +235,7 @@ function LazyPig_CreateOptionsFrame()
 	local str = "Group Invite Accept Rules"
 	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 250, -90, str, CheckBoxTables[str])
 
-	local str = "Single Choise Rules"
+	local str = "Single Choice Rules"
 	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -150, str, CheckBoxTables[str])
 
 	return frame

@@ -1,4 +1,4 @@
-LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, SUMM = true, EBG = true, LBG = true, QBG = false, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = false, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false}
+LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, SUMM = true, EBG = true, LBG = true, QBG = false, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = true, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false}
 
 LP_VERSION = "5.00" --UPDATE THIS MANUALLY! This is NOT used, but hey, it's at top
 
@@ -619,11 +619,12 @@ end
 
 function LazyPig_StaticPopup_OnShow()
 	if this.which == "QUEST_ACCEPT" and LazyPig_BG() and LPCONFIG.SBG then
-		DEFAULT_CHAT_FRAME:AddMessage("Quest Share Blocked");
-		this:Hide()
+		UIErrorsFrame:Clear();
+		UIErrorsFrame:AddMessage("Quest Blocked Successfully");
+		this:Hide();
 		
 	else
-		Original_StaticPopup_OnShow()
+		Original_StaticPopup_OnShow();
 	end	
 end
  

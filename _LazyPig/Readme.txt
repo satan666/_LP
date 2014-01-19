@@ -102,3 +102,6 @@ Some of the addon's functions may not work if you're using not en/us localized c
 New in 4.56
 - some minor fixes
 - resurrection auto accept now available only in instances
+New in 5.00
+- Block Battleground Quest Share feature(no more Empty Stables)
+- Brand New GUI made by mrmr thx bro

@@ -1,4 +1,4 @@
-LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, SUMM = true, EBG = true, LBG = true, QBG = false, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = true, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false}
+LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, DINV = true, SUMM = true, EBG = true, LBG = true, QBG = false, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = true, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false}
 
 LP_VERSION = "5.00" --UPDATE THIS MANUALLY! This is NOT used, but hey, it's at top
 
@@ -95,12 +95,13 @@ local LazyPigMenuStrings = {
 		[30]= "GuildMates",
 		[31]= "Friends",
 		[32]= "Strangers",
+		[33]= "Idle while in BG or Queue",
 		[40]= "Show Friends",
 		[41]= "Show Enemies",
 		[42]= "Hide if Unchecked",
-		[50]= "Enter BattleGround",
-		[51]= "Leave BattleGround",
-		[52]= "Queue BattleGround",
+		[50]= "Enter BG",
+		[51]= "Leave BG",
+		[52]= "Queue BG",
 		[60]= "Always",
 		[61]= "Warrior Shield/Druid Bear",
 		[90]= "Summon Auto Accept",
@@ -600,7 +601,9 @@ function LazyPig_OnEvent(event)
 		LazyPig_AutoSummon();
 			
 	elseif(event == "PARTY_INVITE_REQUEST") then
-		if LPCONFIG.GINV and IsGuildMate(arg1) or LPCONFIG.FINV and IsFriend(arg1) or not IsGuildMate(arg1) and not IsFriend(arg1) and LPCONFIG.SINV then
+		local check1 = not LPCONFIG.DINV or LPCONFIG.DINV and not LazyPig_BG() and not LazyPig_Queue()
+		local check2 = LPCONFIG.GINV and IsGuildMate(arg1) or LPCONFIG.FINV and IsFriend(arg1) or not IsGuildMate(arg1) and not IsFriend(arg1) and LPCONFIG.SINV
+		if check1 and check2 then
 			AcceptGroupInvite();
 		end
 	elseif(event == "RESURRECT_REQUEST" and LPCONFIG.REZ) then
@@ -1169,6 +1172,16 @@ function LazyPig_BG()
 	return false
 end
 
+function LazyPig_Queue()
+	for i=1, MAX_BATTLEFIELD_QUEUES do
+		local status, mapName, instanceID = GetBattlefieldStatus(i);	
+		if(status == "confirm" or status == "active") then
+			return true
+		end
+	end
+	return nil
+end
+
 function LazyPig_EndSplit()
 	timer_split = nil
 	tmp_splitval = 1
@@ -1544,6 +1557,7 @@ function LazyPig_GetOption(num)
 	or num == 30 and LPCONFIG.GINV
 	or num == 31 and LPCONFIG.FINV
 	or num == 32 and LPCONFIG.SINV
+	or num == 33 and LPCONFIG.DINV
 	or num == 40 and LPCONFIG.FPLATE
 	or num == 41 and LPCONFIG.EPLATE
 	or num == 42 and LPCONFIG.HPLATE 
@@ -1651,6 +1665,9 @@ function LazyPig_SetOption(num)
 	elseif num == 32 then 
 		LPCONFIG.SINV = true
 		if not checked then LPCONFIG.SINV = nil end
+	elseif num == 33 then 
+		LPCONFIG.DINV = true
+		if not checked then LPCONFIG.DINV = nil end	
 	elseif num == 40 then 								--fixed
 		LPCONFIG.FPLATE = true
 		if not checked then LPCONFIG.FPLATE = nil end

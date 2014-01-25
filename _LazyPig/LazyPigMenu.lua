@@ -45,7 +45,8 @@ local CheckBoxTables = {
 		[0] = "LazyPigCheckboxGroupGroupInvite",
 		[1] = { "LazyPigCheckbox30", "GuildMates" },
 		[2] = { "LazyPigCheckbox31", "Friends" },
-		[3] = { "LazyPigCheckbox32", "Strangers" }
+		[3] = { "LazyPigCheckbox32", "Strangers" },
+		[4] = { "LazyPigCheckbox33", "No Auto Accept invites while in BattleGround or Queue" }
 	},
 
 	["Single Choice Rules"] = {
@@ -128,7 +129,7 @@ function LazyPig_CreateOptionsFrame()
 	frame:SetScale(.81)
 
 	frame:SetWidth(480)
-	frame:SetHeight(380)
+	frame:SetHeight(383)
 	
 	frame:SetPoint("TOPLEFT", nil, "TOPLEFT", 250, -50)
 	frame:SetBackdrop( {
@@ -236,7 +237,7 @@ function LazyPig_CreateOptionsFrame()
 	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 250, -90, str, CheckBoxTables[str])
 
 	local str = "Single Choice Rules"
-	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -150, str, CheckBoxTables[str])
+	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -165, str, CheckBoxTables[str])
 
 	return frame
 

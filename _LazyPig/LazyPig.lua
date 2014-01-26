@@ -1,4 +1,4 @@
-LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, DINV = true, SUMM = true, EBG = true, LBG = true, QBG = false, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = true, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false}
+LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, DINV = true, SUMM = true, EBG = true, LBG = true, QBG = false, RBG = true, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = true, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false}
 
 LP_VERSION = "5.00" --UPDATE THIS MANUALLY! This is NOT used, but hey, it's at top
 
@@ -102,6 +102,7 @@ local LazyPigMenuStrings = {
 		[50]= "Enter BG",
 		[51]= "Leave BG",
 		[52]= "Queue BG",
+		[53]= "Auto Release",
 		[60]= "Always",
 		[61]= "Warrior Shield/Druid Bear",
 		[90]= "Summon Auto Accept",
@@ -380,6 +381,7 @@ function LazyPig_OnEvent(event)
 		this:RegisterEvent("BANKFRAME_CLOSED")
 		this:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 		this:RegisterEvent("PLAYER_UNGHOST")
+		this:RegisterEvent("PLAYER_DEAD")
 		this:RegisterEvent("PLAYER_AURAS_CHANGED")
 		this:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
 		this:RegisterEvent("UNIT_INVENTORY_CHANGED")
@@ -416,6 +418,11 @@ function LazyPig_OnEvent(event)
 			duel_active = nil
 			CancelDuel()
 			UIErrorsFrame:AddMessage(arg1.." - Duel Cancelled")
+		end	
+	
+	elseif(event == "PLAYER_DEAD") then
+		if LPCONFIG.RBG and LazyPig_BG() then
+			RepopMe();
 		end	
 	
 	elseif(event == "ZONE_CHANGED_NEW_AREA" or event == "PLAYER_UNGHOST") then
@@ -609,7 +616,7 @@ function LazyPig_OnEvent(event)
 	elseif(event == "RESURRECT_REQUEST" and LPCONFIG.REZ) then
 		UIErrorsFrame:AddMessage(arg1.." - Resurrection")
 		TargetByName(arg1, true)
-		if GetCorpseRecoveryDelay() == 0 and (LazyPig_Raid() or LazyPig_Dungeon()) and UnitIsPlayer("target") and UnitIsVisible("target") and not UnitAffectingCombat("target") then
+		if GetCorpseRecoveryDelay() == 0 and (LazyPig_Raid() or LazyPig_Dungeon() or LazyPig_BG()) and UnitIsPlayer("target") and UnitIsVisible("target") and not UnitAffectingCombat("target") then
 			AcceptResurrect()
 			StaticPopup_Hide("RESURRECT_NO_TIMER"); 
 			StaticPopup_Hide("RESURRECT_NO_SICKNESS");
@@ -1564,6 +1571,7 @@ function LazyPig_GetOption(num)
 	or num == 50 and LPCONFIG.EBG
 	or num == 51 and LPCONFIG.LBG
 	or num == 52 and LPCONFIG.QBG
+	or num == 53 and LPCONFIG.RBG
 	or num == 60 and LPCONFIG.SALVA == 1
 	or num == 61 and LPCONFIG.SALVA == 2
 	or num == 90 and LPCONFIG.SUMM
@@ -1702,7 +1710,10 @@ function LazyPig_SetOption(num)
 		if not checked then LPCONFIG.LBG = nil end
 	elseif num == 52 then 
 		LPCONFIG.QBG = true
-		if not checked then LPCONFIG.QBG = nil end	
+		if not checked then LPCONFIG.QBG = nil end
+	elseif num == 53 then 
+		LPCONFIG.RBG = true
+		if not checked then LPCONFIG.RBG = nil end		
 	elseif num == 60 then
 		LPCONFIG.SALVA = 1
 		if not checked then LPCONFIG.SALVA = nil end

@@ -347,7 +347,7 @@ function LazyPig_OnEvent(event)
 		local LP_VERSION = GetAddOnMetadata("_LazyPig", "Version")
 		local LP_AUTHOR = GetAddOnMetadata("_LazyPig", "Author")
 		
-		DEFAULT_CHAT_FRAME:AddMessage(LP_TITLE .. " v" .. LP_VERSION .. " by " .."|cff6969FF".. LP_AUTHOR .."|cffffffff".. " loaded, type".."|cff00ff00".." /lp".."|cffffffff for options")
+		DEFAULT_CHAT_FRAME:AddMessage(LP_TITLE .. " v" .. LP_VERSION .. " by " .."|cffFF0066".. LP_AUTHOR .."|cffffffff".. " loaded, type".."|cff00eeee".." /lp".."|cffffffff for options")
 	elseif (event == "PLAYER_LOGIN") then
 	--if (event == "PLAYER_ENTERING_WORLD") then
 	--	this:UnregisterEvent("PLAYER_ENTERING_WORLD")
@@ -1934,20 +1934,25 @@ function LazyPig_ShowBindings(bind, fs, desc)
 end
 
 function LazyPig_ChatFrame_OnEvent(event)
-	if LPCONFIG.SPAM and arg2 and arg2 ~= GetUnitName("player") and (event == "CHAT_MSG_SAY" or event == "CHAT_MSG_CHANNEL" or event == "CHAT_MSG_YELL" or event == "CHAT_MSG_EMOTE" and not (IsGuildMate(arg2) or IsFriend(arg2))) then
-		
-		local time = GetTime()
-		local index = ChatMessage["INDEX"]
-		
-		for blockindex,blockmatch in pairs(ChatMessage[index]) do
-			local findmatch1 = (blockmatch + 70) > time --70s delay
-			local findmatch2 = blockindex == arg1 
-			if findmatch1 and findmatch2 then 
-				return
+	if LPCONFIG.SPAM then
+		if event == "CHAT_MSG_LOOT" and (string.find(arg1 ,"selected") and (string.find(arg1 ,"Bijou") or string.find(arg1 ,"Coin") or string.find(arg1 ,"Scarab") or string.find(arg1 ,"Idol"))) then 
+			return
+			
+		elseif arg2 and arg2 ~= GetUnitName("player") and (event == "CHAT_MSG_SAY" or event == "CHAT_MSG_CHANNEL" or event == "CHAT_MSG_YELL" or event == "CHAT_MSG_EMOTE" and not (IsGuildMate(arg2) or IsFriend(arg2))) then
+			
+			local time = GetTime()
+			local index = ChatMessage["INDEX"]
+			
+			for blockindex,blockmatch in pairs(ChatMessage[index]) do
+				local findmatch1 = (blockmatch + 70) > time --70s delay
+				local findmatch2 = blockindex == arg1 
+				if findmatch1 and findmatch2 then 
+					return
+				end
 			end
+			ChatMessage[index][arg1] = time		
 		end
-		ChatMessage[index][arg1] = time		
-	end	
+	end
 	
 	Original_ChatFrame_OnEvent(event);
 end
@@ -2027,4 +2032,11 @@ function LazyPig_Duel_EFC()
 			StartDuel(GetUnitName("target")) 
 		end
 	end	
+end
+
+
+function aaa()
+PlayerFrame:Hide()
+
+
 end

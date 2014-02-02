@@ -1,5 +1,5 @@
 local CheckBoxTables = {
-	["Green Roll [Ctrl-Alt]"] = {
+	["Green Items Roll [Ctrl-Alt]"] = {
 		[0] = "LazyPigCheckboxGroupGreedRoll",
 		[1] = { "LazyPigCheckbox00", "Need" },
 		[2] = { "LazyPigCheckbox01", "Greed" },
@@ -29,7 +29,7 @@ local CheckBoxTables = {
 		[4] = { "LazyPigCheckbox53", "Auto Release", "Auto Accept Release in BG" }
 	},
 	
-	["Intelligent Salvation Remover"] = {
+	["Smart Salvation Remover"] = {
 		[0] = "LazyPigCheckboxGroupSalvationRemover",
 		[1] = { "LazyPigCheckbox60", "Always" },
 		[2] = { "LazyPigCheckbox61", "Warrior Shield/Druid Bear" },
@@ -216,7 +216,7 @@ function LazyPig_CreateOptionsFrame()
 		end
 	end)
 
-	local str = "Green Roll [Ctrl-Alt]"
+	local str = "Green Items Roll [Ctrl-Alt]"
 	frame.cbgroup_greedroll = CheckBoxGroup(frame, 20, -45, str, CheckBoxTables[str])
 	
 	local str = "Zul'Gurub Roll Automation"
@@ -231,7 +231,7 @@ function LazyPig_CreateOptionsFrame()
 	local str = "Nameplates Display Rules"
 	frame.cbgroup_nameplates = CheckBoxGroup(frame, 20, -313, str, CheckBoxTables[str])
 	
-	local str = "Intelligent Salvation Remover"
+	local str = "Smart Salvation Remover"
 	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -45, str, CheckBoxTables[str])
 
 	local str = "Group Invite Accept Rules"

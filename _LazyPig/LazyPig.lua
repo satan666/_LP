@@ -1935,7 +1935,7 @@ end
 
 function LazyPig_ChatFrame_OnEvent(event)
 	if LPCONFIG.SPAM then
-		if event == "CHAT_MSG_LOOT" and (string.find(arg1 ,"selected") and (string.find(arg1 ,"Bijou") or string.find(arg1 ,"Coin") or string.find(arg1 ,"Scarab") or string.find(arg1 ,"Idol"))) then 
+		if event == "CHAT_MSG_LOOT" and (not string.find(arg1 ,"won") and (string.find(arg1 ,"Bijou") or string.find(arg1 ,"Coin") or string.find(arg1 ,"Scarab") or string.find(arg1 ,"Idol"))) then 
 			return
 			
 		elseif arg2 and arg2 ~= GetUnitName("player") and (event == "CHAT_MSG_SAY" or event == "CHAT_MSG_CHANNEL" or event == "CHAT_MSG_YELL" or event == "CHAT_MSG_EMOTE" and not (IsGuildMate(arg2) or IsFriend(arg2))) then

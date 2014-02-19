@@ -1,4 +1,37 @@
-LPCONFIG = {DISMOUNT = true, CAM = false, GINV = true, FINV = true, SINV = nil, DINV = true, SUMM = true, EBG = true, LBG = true, QBG = false, RBG = true, SBG = false, LOOT = true, EPLATE = false, FPLATE = false, HPLATE = false, RIGHT = true, ZG = 1, DUEL = false, NOSAVE = false, GREEN = 2, SPECIALKEY = true, WORLDDUNGEON = false, WORLDRAID = false, WORLDBG = false, WORLDUNCHECK = nil, SPAM = true, SHIFTSPLIT = true, REZ = true, GOSSIP = true, SALVA = false}
+LPCONFIG = {
+	DISMOUNT = true, 
+	CAM = false, 
+	GINV = true, 
+	FINV = true, 
+	SINV = nil, 
+	DINV = true, 
+	SUMM = true, 
+	EBG = true, 
+	LBG = true, 
+	QBG = false, 
+	RBG = true, 
+	SBG = false, 
+	AQUE = true,
+	LOOT = true, 
+	EPLATE = false, 
+	FPLATE = false, 
+	HPLATE = false, 
+	RIGHT = true, 
+	ZG = 1, 
+	DUEL = false, 
+	NOSAVE = false, 
+	GREEN = 2, 
+	SPECIALKEY = true, 
+	WORLDDUNGEON = false, 
+	WORLDRAID = false, 
+	WORLDBG = false, 
+	WORLDUNCHECK = nil, 
+	SPAM = true, 
+	SHIFTSPLIT = true, 
+	REZ = true, 
+	GOSSIP = true, 
+	SALVA = false
+}
 
 LP_VERSION = "5.00" --UPDATE THIS MANUALLY! This is NOT used, but hey, it's at top
 
@@ -103,6 +136,7 @@ local LazyPigMenuStrings = {
 		[51]= "Leave BG",
 		[52]= "Queue BG",
 		[53]= "Auto Release",
+		[54]= "Leader Queue Annouce",
 		[60]= "Always",
 		[61]= "Warrior Shield/Druid Bear",
 		[90]= "Summon Auto Accept",
@@ -516,8 +550,12 @@ function LazyPig_OnEvent(event)
 			LPCONFIG.NOSAVE = GetRealmName()
 			DEFAULT_CHAT_FRAME:AddMessage("LazyPig:"..RED.."Auto Save Disabled - Command not Supported");		
 		
-		elseif string.find(arg1 ,"Queued") and UnitInRaid("player") and (UnitIsPartyLeader("player") or IsShiftKeyDown()) then
-			SendChatMessage(arg1, "RAID");
+		elseif LPCONFIG.AQUE and string.find(arg1 ,"Queued") and (UnitIsPartyLeader("player") or IsShiftKeyDown()) then
+			if UnitInRaid("player") then
+				SendChatMessage(arg1, "RAID");
+			else
+				SendChatMessage(arg1, "PARTY");
+			end
 			
 		elseif string.find(arg1 ,"completed.") then
 			LazyPig_FixQuest(arg1)
@@ -1572,6 +1610,7 @@ function LazyPig_GetOption(num)
 	or num == 51 and LPCONFIG.LBG
 	or num == 52 and LPCONFIG.QBG
 	or num == 53 and LPCONFIG.RBG
+	or num == 54 and LPCONFIG.AQUE
 	or num == 60 and LPCONFIG.SALVA == 1
 	or num == 61 and LPCONFIG.SALVA == 2
 	or num == 90 and LPCONFIG.SUMM
@@ -1713,7 +1752,10 @@ function LazyPig_SetOption(num)
 		if not checked then LPCONFIG.QBG = nil end
 	elseif num == 53 then 
 		LPCONFIG.RBG = true
-		if not checked then LPCONFIG.RBG = nil end		
+		if not checked then LPCONFIG.RBG = nil end
+	elseif num == 54 then 
+		LPCONFIG.AQUE = true
+		if not checked then LPCONFIG.AQUE = nil end			
 	elseif num == 60 then
 		LPCONFIG.SALVA = 1
 		if not checked then LPCONFIG.SALVA = nil end

@@ -26,7 +26,8 @@ local CheckBoxTables = {
 		[1] = { "LazyPigCheckbox50", "Enter Battleground", "Enter the Battleground as soon as the queue popup" },
 		[2] = { "LazyPigCheckbox51", "Leave Battleground", "Leave the Battleground as soon as it finish"},
 		[3] = { "LazyPigCheckbox52", "Queue Battleground", "Join the queue as soon as the BattleMaster is right-clicked" },
-		[4] = { "LazyPigCheckbox53", "Auto Release", "Auto Accept Release in BG" }
+		[4] = { "LazyPigCheckbox53", "Auto Release", "Auto Accept Release in BG" },
+		[5] = { "LazyPigCheckbox54", "Leader Queue Annouce" }
 	},
 	
 	["Smart Salvation Remover"] = {
@@ -130,7 +131,7 @@ function LazyPig_CreateOptionsFrame()
 	frame:SetScale(.81)
 
 	frame:SetWidth(480)
-	frame:SetHeight(389)
+	frame:SetHeight(396)
 	
 	frame:SetPoint("TOPLEFT", nil, "TOPLEFT", 250, -50)
 	frame:SetBackdrop( {
@@ -229,16 +230,16 @@ function LazyPig_CreateOptionsFrame()
 	frame.cbgroup_bgautomation = CheckBoxGroup(frame, 20, -240, str, CheckBoxTables[str])
 	
 	local str = "Nameplates Display Rules"
-	frame.cbgroup_nameplates = CheckBoxGroup(frame, 20, -313, str, CheckBoxTables[str])
+	frame.cbgroup_nameplates = CheckBoxGroup(frame, 250, -45, str, CheckBoxTables[str])
 	
 	local str = "Smart Salvation Remover"
-	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -45, str, CheckBoxTables[str])
+	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 20, -330, str, CheckBoxTables[str])
 
 	local str = "Group Invite Accept Rules"
-	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 250, -90, str, CheckBoxTables[str])
+	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 250, -105, str, CheckBoxTables[str])
 
 	local str = "Single Choice Rules"
-	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -165, str, CheckBoxTables[str])
+	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -180, str, CheckBoxTables[str])
 
 	return frame
 

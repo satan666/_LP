@@ -27,7 +27,7 @@ local CheckBoxTables = {
 		[2] = { "LazyPigCheckbox51", "Leave Battleground", "Leave the Battleground as soon as it finish"},
 		[3] = { "LazyPigCheckbox52", "Queue Battleground", "Join the queue as soon as the BattleMaster is right-clicked" },
 		[4] = { "LazyPigCheckbox53", "Auto Release", "Auto Accept Release in BG" },
-		[5] = { "LazyPigCheckbox54", "Leader Queue Annouce" }
+		[5] = { "LazyPigCheckbox54", "Leader Queue Announce" }
 	},
 	
 	["Smart Salvation Remover"] = {

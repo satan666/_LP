@@ -553,7 +553,7 @@ function LazyPig_OnEvent(event)
 		elseif LPCONFIG.AQUE and string.find(arg1 ,"Queued") and (UnitIsPartyLeader("player") or IsShiftKeyDown()) then
 			if UnitInRaid("player") then
 				SendChatMessage(arg1, "RAID");
-			else
+			elseif GetNumPartyMembers() > 1 then
 				SendChatMessage(arg1, "PARTY");
 			end
 			

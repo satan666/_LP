@@ -1,6 +1,6 @@
 ## Interface: 11200
 ## Title: _LazyPig
-## Version: 5.22
+## Version: 5.30
 ## Notes: UI Enhancements
 ## Author: Ogrisch and mrmr
 ## SavedVariables: LPCONFIG, LPMULTIBOX

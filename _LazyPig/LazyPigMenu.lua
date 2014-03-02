@@ -64,11 +64,19 @@ local CheckBoxTables = {
 		[9] = { "LazyPigCheckbox98", "Gossip Auto Processing", "Skip Gossip-Windows-Choises from Innkeepers and FlyMasters" },
 		[10] = { "LazyPigCheckbox99", "Character Auto-Save", "Use the .save command when....when?" },
 		[11] = { "LazyPigCheckbox100", "Auto Dismount", "Auto-Dismount when it's required by another action" },
-		[12] = { "LazyPigCheckbox101", "Chat Spam Filter", "One minute ban for identical messages" },
-		[13] = { "LazyPigCheckbox102", "Block Battleground Quest Sharing", "Really? No more 'Stable' spam?" }
+		--[12] = { "LazyPigCheckbox101", "Chat Spam Filter", "One minute ban for identical messages" },
+		[12] = { "LazyPigCheckbox102", "Block Battleground Quest Sharing", "Really? No more 'Stable' spam?" }
+	},
+	
+		["Chat Filter"] = {
+		[0] = "LazyPigCheckboxChatFilter",
+		[1] = { "LazyPigCheckbox70", "Players' Spam" },
+		[2] = { "LazyPigCheckbox71", "Uncommon Roll" },
+		[3] = { "LazyPigCheckbox72", "Rare Roll" },
+		[4] = { "LazyPigCheckbox73", "Poor-Common Loot" }
 	},
 }
-
+--Grey-Common Loot
 
 local function CheckBoxGroup(hParent, offsetX, offsetY, sTitle, tCheck)
 	local frame = CreateFrame("Frame", tCheck[0], hParent)
@@ -131,7 +139,7 @@ function LazyPig_CreateOptionsFrame()
 	frame:SetScale(.81)
 
 	frame:SetWidth(480)
-	frame:SetHeight(396)
+	frame:SetHeight(428)
 	
 	frame:SetPoint("TOPLEFT", nil, "TOPLEFT", 250, -50)
 	frame:SetBackdrop( {
@@ -224,22 +232,25 @@ function LazyPig_CreateOptionsFrame()
 	frame.cbgroup_zgroll = CheckBoxGroup(frame, 20, -105, str, CheckBoxTables[str])
 
 	local str = "World Chat Mute"
-	frame.cbgroup_worldchatmute = CheckBoxGroup(frame, 20, -165, str, CheckBoxTables[str])
+	frame.cbgroup_worldchatmute = CheckBoxGroup(frame, 20, -167, str, CheckBoxTables[str])
 	
 	local str = "Battlegrounds Automation"
-	frame.cbgroup_bgautomation = CheckBoxGroup(frame, 20, -240, str, CheckBoxTables[str])
+	frame.cbgroup_bgautomation = CheckBoxGroup(frame, 20, -243, str, CheckBoxTables[str])
 	
 	local str = "Nameplates Display Rules"
 	frame.cbgroup_nameplates = CheckBoxGroup(frame, 250, -45, str, CheckBoxTables[str])
 	
 	local str = "Smart Salvation Remover"
-	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 20, -330, str, CheckBoxTables[str])
+	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -179, str, CheckBoxTables[str])
+	
+	local str = "Chat Filter"
+	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -104, str, CheckBoxTables[str])
 
 	local str = "Group Invite Accept Rules"
-	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 250, -105, str, CheckBoxTables[str])
+	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 20, -331, str, CheckBoxTables[str])
 
 	local str = "Single Choice Rules"
-	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -180, str, CheckBoxTables[str])
+	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -226, str, CheckBoxTables[str])
 
 	return frame
 

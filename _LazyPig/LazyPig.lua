@@ -26,14 +26,14 @@ LPCONFIG = {
 	WORLDRAID = false, 
 	WORLDBG = false, 
 	WORLDUNCHECK = nil, 
-	SPAM = true, 
+	SPAM = true,
+	SPAM_UNCOMMON = true,
+	SPAM_RARE = true,
 	SHIFTSPLIT = true, 
 	REZ = true, 
 	GOSSIP = true, 
 	SALVA = false
 }
-
-LP_VERSION = "5.00" --UPDATE THIS MANUALLY! This is NOT used, but hey, it's at top
 
 BINDING_HEADER_LP_HEADER = "_LazyPig";
 BINDING_NAME_LOGOUT = "Logout";
@@ -70,6 +70,7 @@ local shift_time = 0
 local ctrlalttime = 0
 local ctrlshifttime = 0
 local altshifttime = 0
+local greenrolltime = 0
 
 local timer_split = false
 local player_summon_confirm = false
@@ -139,6 +140,13 @@ local LazyPigMenuStrings = {
 		[54]= "Leader Queue Announce",
 		[60]= "Always",
 		[61]= "Warrior Shield/Druid Bear",
+		
+		[70]= "Players' Spam",
+		[71]= "Uncommon Roll",
+		[72]= "Rare Roll",
+		[73]= "Poor-Common Loot",
+		
+		
 		[90]= "Summon Auto Accept",
 		[91]= "Loot Window Auto Position",
 		[92]= "Improved Right Click",
@@ -958,6 +966,7 @@ function LazyPig_GreenRoll()
 				if quality == 2 then
 					RollOnLoot(id, LPCONFIG.GREEN);
 					local _, _, _, hex = GetItemQualityColor(quality)
+					greenrolltime = GetTime() + 1
 					DEFAULT_CHAT_FRAME:AddMessage("LazyPig: "..hex..RollReturn().."|cffffffff Roll "..GetLootRollItemLink(id))
 					pass = true
 				end
@@ -1614,6 +1623,12 @@ function LazyPig_GetOption(num)
 	or num == 60 and LPCONFIG.SALVA == 1
 	or num == 61 and LPCONFIG.SALVA == 2
 	or num == 90 and LPCONFIG.SUMM
+	
+	or num == 70 and LPCONFIG.SPAM
+	or num == 71 and LPCONFIG.SPAM_UNCOMMON
+	or num == 72 and LPCONFIG.SPAM_RARE
+	or num == 73 and LPCONFIG.SPAM_LOOT
+	
 	or num == 91 and LPCONFIG.LOOT
 	or num == 92 and LPCONFIG.RIGHT
 	or num == 93 and LPCONFIG.SHIFTSPLIT
@@ -1766,6 +1781,24 @@ function LazyPig_SetOption(num)
 		if not checked then LPCONFIG.SALVA = nil end
 		LazyPigMenuObjects[60]:SetChecked(nil)
 		LazyPig_CheckSalvation()
+		
+		
+		
+		
+		
+	elseif num == 70 then --fixed
+		LPCONFIG.SPAM = true
+		if not checked then LPCONFIG.SPAM = nil end
+	elseif num == 71 then 
+		LPCONFIG.SPAM_UNCOMMON = true
+		if not checked then LPCONFIG.SPAM_UNCOMMON = nil end
+	elseif num == 72 then 
+		LPCONFIG.SPAM_RARE	 = true
+		if not checked then LPCONFIG.SPAM_RARE	 = nil end	
+	elseif num == 73 then 
+		LPCONFIG.SPAM_LOOT	 = true
+		if not checked then LPCONFIG.SPAM_LOOT	 = nil end		
+		
 	elseif num == 90 then
 		LPCONFIG.SUMM = true
 		if not checked then LPCONFIG.SUMM = nil end	
@@ -1976,24 +2009,37 @@ function LazyPig_ShowBindings(bind, fs, desc)
 end
 
 function LazyPig_ChatFrame_OnEvent(event)
-	if LPCONFIG.SPAM then
-		if event == "CHAT_MSG_LOOT" and (not string.find(arg1 ,"won") and (string.find(arg1 ,"Bijou") or string.find(arg1 ,"Coin") or string.find(arg1 ,"Scarab") or string.find(arg1 ,"Idol"))) then 
+	if event == "CHAT_MSG_LOOT" then
+		local bijou = string.find(arg1 ,"Bijou")
+		local coin = string.find(arg1 ,"Coin")
+		
+		local green_roll = greenrolltime > GetTime()
+		local check_uncommon = LPCONFIG.SPAM_UNCOMMON and string.find(arg1 ,"1eff00")
+		local check_rare = LPCONFIG.SPAM_RARE and string.find(arg1 ,"0070dd")
+		local check_poor = LPCONFIG.SPAM_LOOT and (string.find(arg1 ,"9d9d9d") or string.find(arg1 ,"ffffff"))
+			
+		local check1 = string.find(arg1 ,"You")
+		local check2 = string.find(arg1 ,"won") or string.find(arg1 ,"receive")
+		local check3 = LPCONFIG.ZG and (bijou or coin)
+		local check4 = check1 and not check3 and not green_roll or check2 
+
+		if not check4 and (check_uncommon or check_rare) or check_poor and not check1 then
 			return
+		end	
+	end
+	
+	if LPCONFIG.SPAM and arg2 and arg2 ~= GetUnitName("player") and (event == "CHAT_MSG_SAY" or event == "CHAT_MSG_CHANNEL" or event == "CHAT_MSG_YELL" or event == "CHAT_MSG_EMOTE" and not (IsGuildMate(arg2) or IsFriend(arg2))) then
+		local time = GetTime()
+		local index = ChatMessage["INDEX"]
 			
-		elseif arg2 and arg2 ~= GetUnitName("player") and (event == "CHAT_MSG_SAY" or event == "CHAT_MSG_CHANNEL" or event == "CHAT_MSG_YELL" or event == "CHAT_MSG_EMOTE" and not (IsGuildMate(arg2) or IsFriend(arg2))) then
-			
-			local time = GetTime()
-			local index = ChatMessage["INDEX"]
-			
-			for blockindex,blockmatch in pairs(ChatMessage[index]) do
-				local findmatch1 = (blockmatch + 70) > time --70s delay
-				local findmatch2 = blockindex == arg1 
-				if findmatch1 and findmatch2 then 
-					return
-				end
+		for blockindex,blockmatch in pairs(ChatMessage[index]) do
+			local findmatch1 = (blockmatch + 70) > time --70s delay
+			local findmatch2 = blockindex == arg1 
+			if findmatch1 and findmatch2 then 
+				return
 			end
-			ChatMessage[index][arg1] = time		
 		end
+		ChatMessage[index][arg1] = time		
 	end
 	
 	Original_ChatFrame_OnEvent(event);

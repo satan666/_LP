@@ -144,7 +144,7 @@ local LazyPigMenuStrings = {
 		[70]= "Players' Spam",
 		[71]= "Uncommon Roll",
 		[72]= "Rare Roll",
-		[73]= "Poor-Common Loot",
+		[73]= "Poor-Common-Money Loot",
 		
 		
 		[90]= "Summon Auto Accept",
@@ -407,6 +407,7 @@ function LazyPig_OnEvent(event)
 		this:RegisterEvent("QUEST_GREETING")
 		this:RegisterEvent("UI_ERROR_MESSAGE")
 		this:RegisterEvent("CHAT_MSG_LOOT")
+		--this:RegisterEvent("CHAT_MSG_MONEY")
 		this:RegisterEvent("QUEST_PROGRESS")
 		this:RegisterEvent("QUEST_COMPLETE")
 		this:RegisterEvent("START_LOOT_ROLL")
@@ -2009,21 +2010,22 @@ function LazyPig_ShowBindings(bind, fs, desc)
 end
 
 function LazyPig_ChatFrame_OnEvent(event)
-	if event == "CHAT_MSG_LOOT" then
+	if event == "CHAT_MSG_LOOT" or event == "CHAT_MSG_MONEY" then
 		local bijou = string.find(arg1 ,"Bijou")
 		local coin = string.find(arg1 ,"Coin")
 		
 		local green_roll = greenrolltime > GetTime()
 		local check_uncommon = LPCONFIG.SPAM_UNCOMMON and string.find(arg1 ,"1eff00")
 		local check_rare = LPCONFIG.SPAM_RARE and string.find(arg1 ,"0070dd")
-		local check_poor = LPCONFIG.SPAM_LOOT and (string.find(arg1 ,"9d9d9d") or string.find(arg1 ,"ffffff"))
-			
+		local check_loot = LPCONFIG.SPAM_LOOT and (string.find(arg1 ,"9d9d9d") or string.find(arg1 ,"ffffff") or string.find(arg1 ,"Your share of the loot"))
+		local check_money = LPCONFIG.SPAM_LOOT and string.find(arg1 ,"Your share of the loot")
+	
 		local check1 = string.find(arg1 ,"You")
 		local check2 = string.find(arg1 ,"won") or string.find(arg1 ,"receive")
 		local check3 = LPCONFIG.ZG and (bijou or coin)
 		local check4 = check1 and not check3 and not green_roll or check2 
 
-		if not check4 and (check_uncommon or check_rare) or check_poor and not check1 then
+		if not check4 and (check_uncommon or check_rare) or check_loot and not check1 or check_money then
 			return
 		end	
 	end

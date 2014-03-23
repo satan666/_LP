@@ -27,7 +27,8 @@ local CheckBoxTables = {
 		[2] = { "LazyPigCheckbox51", "Leave Battleground", "Leave the Battleground as soon as it finish"},
 		[3] = { "LazyPigCheckbox52", "Queue Battleground", "Join the queue as soon as the BattleMaster is right-clicked" },
 		[4] = { "LazyPigCheckbox53", "Auto Release", "Auto Accept Release in BG" },
-		[5] = { "LazyPigCheckbox54", "Leader Queue Announce" }
+		[5] = { "LazyPigCheckbox54", "Leader Queue Announce" },
+		[6] = { "LazyPigCheckbox55", "Leader Queue Announce" }
 	},
 	
 	["Smart Salvation Remover"] = {
@@ -65,7 +66,7 @@ local CheckBoxTables = {
 		[10] = { "LazyPigCheckbox99", "Character Auto-Save", "Use the .save command when....when?" },
 		[11] = { "LazyPigCheckbox100", "Auto Dismount", "Auto-Dismount when it's required by another action" },
 		--[12] = { "LazyPigCheckbox101", "Chat Spam Filter", "One minute ban for identical messages" },
-		[12] = { "LazyPigCheckbox102", "Block Battleground Quest Sharing", "Really? No more 'Stable' spam?" }
+		--[12] = { "LazyPigCheckbox102", "Block Battleground Quest Sharing", "Really? No more 'Stable' spam?" }
 	},
 	
 		["Chat Filter"] = {
@@ -238,19 +239,19 @@ function LazyPig_CreateOptionsFrame()
 	frame.cbgroup_bgautomation = CheckBoxGroup(frame, 20, -243, str, CheckBoxTables[str])
 	
 	local str = "Nameplates Display Rules"
-	frame.cbgroup_nameplates = CheckBoxGroup(frame, 250, -45, str, CheckBoxTables[str])
+	frame.cbgroup_nameplates = CheckBoxGroup(frame, 20, -347, str, CheckBoxTables[str])
 	
 	local str = "Smart Salvation Remover"
-	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -179, str, CheckBoxTables[str])
+	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -195, str, CheckBoxTables[str])
 	
 	local str = "Chat Filter"
-	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -104, str, CheckBoxTables[str])
+	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -120, str, CheckBoxTables[str])
 
 	local str = "Group Invite Accept Rules"
-	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 20, -331, str, CheckBoxTables[str])
+	frame.cbgroup_groupinvite = CheckBoxGroup(frame, 250, -45, str, CheckBoxTables[str])
 
 	local str = "Single Choice Rules"
-	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -226, str, CheckBoxTables[str])
+	frame.cbgroup_singlechoise = CheckBoxGroup(frame, 250, -242, str, CheckBoxTables[str])
 
 	return frame
 

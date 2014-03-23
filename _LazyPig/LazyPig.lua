@@ -8,7 +8,7 @@ LPCONFIG = {
 	SUMM = true, 
 	EBG = true, 
 	LBG = true, 
-	QBG = false, 
+	QBG = true, 
 	RBG = true, 
 	SBG = false, 
 	AQUE = true,
@@ -138,6 +138,8 @@ local LazyPigMenuStrings = {
 		[52]= "Queue BG",
 		[53]= "Auto Release",
 		[54]= "Leader Queue Announce",
+		[55]= "Block BG Quest Sharing",
+		
 		[60]= "Always",
 		[61]= "Warrior Shield/Druid Bear",
 		
@@ -158,8 +160,7 @@ local LazyPigMenuStrings = {
 		[98]= "Gossip Auto Processing",
 		[99]= "Character Auto-Save",
 		[100]= "Auto Dismount",
-		[101]= "Chat Spam Filter",
-		[102]= "Block Battleground Quest Sharing"
+		[101]= "Chat Spam Filter"
 }
 
 function LazyPig_OnLoad()
@@ -559,7 +560,7 @@ function LazyPig_OnEvent(event)
 			LPCONFIG.NOSAVE = GetRealmName()
 			DEFAULT_CHAT_FRAME:AddMessage("LazyPig:"..RED.."Auto Save Disabled - Command not Supported");		
 		
-		elseif LPCONFIG.AQUE and string.find(arg1 ,"Queued") and (UnitIsPartyLeader("player") or IsShiftKeyDown()) then
+		elseif LPCONFIG.AQUE and string.find(arg1 ,"Queued") and UnitIsPartyLeader("player") then
 			if UnitInRaid("player") then
 				SendChatMessage(arg1, "RAID");
 			elseif GetNumPartyMembers() > 1 then
@@ -1621,6 +1622,8 @@ function LazyPig_GetOption(num)
 	or num == 52 and LPCONFIG.QBG
 	or num == 53 and LPCONFIG.RBG
 	or num == 54 and LPCONFIG.AQUE
+	or num == 55 and LPCONFIG.SBG
+	
 	or num == 60 and LPCONFIG.SALVA == 1
 	or num == 61 and LPCONFIG.SALVA == 2
 	or num == 90 and LPCONFIG.SUMM
@@ -1641,7 +1644,7 @@ function LazyPig_GetOption(num)
 	or num == 99 and LPCONFIG.NOSAVE ~= GetRealmName()
 	or num == 100 and LPCONFIG.DISMOUNT
 	or num == 101 and LPCONFIG.SPAM
-	or num == 102 and LPCONFIG.SBG
+	
 	or nil then
 		this:SetChecked(true);
 	else
@@ -1771,7 +1774,10 @@ function LazyPig_SetOption(num)
 		if not checked then LPCONFIG.RBG = nil end
 	elseif num == 54 then 
 		LPCONFIG.AQUE = true
-		if not checked then LPCONFIG.AQUE = nil end			
+		if not checked then LPCONFIG.AQUE = nil end		
+	elseif num == 55 then
+		LPCONFIG.SBG  = true
+		if not checked then LPCONFIG.SBG  = nil end	
 	elseif num == 60 then
 		LPCONFIG.SALVA = 1
 		if not checked then LPCONFIG.SALVA = nil end
@@ -1840,9 +1846,6 @@ function LazyPig_SetOption(num)
 	elseif num == 101 then
 		LPCONFIG.SPAM  = true
 		if not checked then LPCONFIG.SPAM  = nil end			
-	elseif num == 102 then
-		LPCONFIG.SBG  = true
-		if not checked then LPCONFIG.SBG  = nil end	
 		
 	else
 		--DEFAULT_CHAT_FRAME:AddMessage("DEBUG: No num assigned - "..num)

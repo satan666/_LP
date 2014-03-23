@@ -114,7 +114,7 @@ local function CheckBoxGroup(hParent, offsetX, offsetY, sTitle, tCheck)
 		cb:SetScript("OnEnter", function()
 			if this.tooltipTitle then
 				GameTooltip:SetOwner(this, "ANCHOR_TOPRIGHT")
-				GameTooltip:SetScale(.71)
+				--GameTooltip:SetScale(.71)
 				GameTooltip:SetBackdropColor(.01, .01, .01, .91)
 				GameTooltip:SetText(this.tooltipTitle)
 				if this.tooltipText then
@@ -230,16 +230,16 @@ function LazyPig_CreateOptionsFrame()
 	frame.cbgroup_greedroll = CheckBoxGroup(frame, 20, -45, str, CheckBoxTables[str])
 	
 	local str = "Zul'Gurub Roll Automation"
-	frame.cbgroup_zgroll = CheckBoxGroup(frame, 20, -105, str, CheckBoxTables[str])
+	frame.cbgroup_zgroll = CheckBoxGroup(frame, 20, -107, str, CheckBoxTables[str])
 
 	local str = "World Chat Mute"
-	frame.cbgroup_worldchatmute = CheckBoxGroup(frame, 20, -167, str, CheckBoxTables[str])
+	frame.cbgroup_worldchatmute = CheckBoxGroup(frame, 20, -168, str, CheckBoxTables[str])
 	
 	local str = "Battlegrounds Automation"
-	frame.cbgroup_bgautomation = CheckBoxGroup(frame, 20, -243, str, CheckBoxTables[str])
+	frame.cbgroup_bgautomation = CheckBoxGroup(frame, 20, -244, str, CheckBoxTables[str])
 	
 	local str = "Nameplates Display Rules"
-	frame.cbgroup_nameplates = CheckBoxGroup(frame, 20, -347, str, CheckBoxTables[str])
+	frame.cbgroup_nameplates = CheckBoxGroup(frame, 20, -348, str, CheckBoxTables[str])
 	
 	local str = "Smart Salvation Remover"
 	frame.cbgroup_salvationremover = CheckBoxGroup(frame, 250, -195, str, CheckBoxTables[str])

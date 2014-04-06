@@ -1204,6 +1204,28 @@ function LazyPig_DropWSGFlag_NoggBuff()
 	end
 end
 
+function LazyPig_ItemIsTradeable(bag, item)
+	for i = 1, 29, 1 do
+		getglobal("LazyPig_Buff_TooltipTextLeft" .. i):SetText("");
+	end
+
+	LazyPig_Buff_Tooltip:SetBagItem(bag, item);
+
+	for i = 1, LazyPig_Buff_Tooltip:NumLines(), 1 do
+		local text = getglobal("LazyPig_Buff_TooltipTextLeft" .. i):GetText();	
+		if ( text == ITEM_SOULBOUND ) then
+			return nil
+		elseif ( text == ITEM_BIND_QUEST ) then
+			return nil
+		elseif ( text == ITEM_CONJURED ) then
+			return nil
+		end
+	end
+	return true
+end
+
+
+
 function LazyPig_Raid()
 	local t = GetRealZoneText()
 	if t =="Molten Core" or t =="Blackwing Lair" or t =="Zul'Gurub" or t =="Ahn'Qiraj" or t =="Onyxia's Lair" or t =="Ruins of Ahn'Qiraj" or t =="Temple of Ahn'Qiraj" or t =="Naxxramas" or t =="Blackrock Spire" then
@@ -1312,7 +1334,6 @@ function LazyPig_WatchSplit(enable)
 end
 
 function LazyPig_UseContainerItem(ParentID,ItemID)
-	
 		if LPCONFIG.SHIFTSPLIT and not CursorHasItem() and not merchantstatus and IsShiftKeyDown() and not IsAltKeyDown() then
 			if(GetTime() - last_click) < 0.3 then return end
 			local _, itemCount, locked = GetContainerItemInfo(ParentID, ItemID)
@@ -1426,7 +1447,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 			end
 			return
 		
-		elseif LPCONFIG.RIGHT and tradestatus and not IsShiftKeyDown() and not IsAltKeyDown() then
+		elseif LPCONFIG.RIGHT and tradestatus and not IsShiftKeyDown() and not IsAltKeyDown() and LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			PickupContainerItem(ParentID,ItemID)
 			local slot = TradeFrame_GetAvailableSlot()
 			if slot then ClickTradeButton(slot) end
@@ -1435,7 +1456,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 			end
 			return
 			
-		elseif LPCONFIG.RIGHT and GMailFrame and GMailFrame:IsVisible() and not CursorHasItem() then
+		elseif LPCONFIG.RIGHT and GMailFrame and GMailFrame:IsVisible() and not CursorHasItem() and LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			local i
 			local bag, item = ParentID,ItemID
 			for i = 1, GMAIL_NUMITEMBUTTONS, 1 do
@@ -1453,7 +1474,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 				end
 			end
 		
-		elseif LPCONFIG.RIGHT and CT_MailFrame and CT_MailFrame:IsVisible() and not IsShiftKeyDown() and not IsAltKeyDown()  then
+		elseif LPCONFIG.RIGHT and CT_MailFrame and CT_MailFrame:IsVisible() and not IsShiftKeyDown() and not IsAltKeyDown() and LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			local bag, item = ParentID,ItemID
 			if ( ( CT_Mail_GetItemFrame(bag, item) or ( CT_Mail_addItem and CT_Mail_addItem[1] == bag and CT_Mail_addItem[2] == item ) ) and not special ) then
 				return;
@@ -1481,7 +1502,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 				end
 			end
 
-		elseif LPCONFIG.RIGHT and mailstatus and not IsShiftKeyDown() and not IsAltKeyDown() then
+		elseif LPCONFIG.RIGHT and mailstatus and not IsShiftKeyDown() and not IsAltKeyDown() and LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			if InboxFrame and InboxFrame:IsVisible() then
 				MailFrameTab_OnClick(2);
 				return
@@ -1495,7 +1516,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 				return
 			end	
 
-		elseif LPCONFIG.RIGHT and auctionstatus and not IsShiftKeyDown() and not IsAltKeyDown() then
+		elseif LPCONFIG.RIGHT and auctionstatus and not IsShiftKeyDown() and not IsAltKeyDown() and LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			if not AuctionFrameAuctions:IsVisible() then
 				AuctionFrameTab3:Click()
 				return

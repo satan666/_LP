@@ -1,7 +1,7 @@
-_LP _LazyPig
-===
+#_LazyPig Wow 1.12.1 
 
-_LazyPig Wow 1.12.1 UI Tweak Addon 
+
+UI Tweak Addon 
 
 Feel free to contribute to this project
 

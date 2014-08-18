@@ -223,21 +223,21 @@ function LazyPig_OnUpdate()
 		ctrlalttime = 0
 		altshifttime = 0
 	end
-		
-	if shift_time == current_time  then	
-		if not (UnitExists("target") and UnitIsUnit("player", "target")) then
-			--
-		elseif not battleframe then
-			battleframe = current_time
-		elseif (current_time - battleframe) > 3 then
-			BattlefieldFrame:Show()
-			battleframe = current_time
-		end
-	elseif battleframe then
-		battleframe = nil
-	end
 			
 	if LPCONFIG.SPECIALKEY then
+		if shift_time == current_time  then	
+			if not (UnitExists("target") and UnitIsUnit("player", "target")) then
+				--
+			elseif not battleframe then
+				battleframe = current_time
+			elseif (current_time - battleframe) > 3 then
+				BattlefieldFrame:Show()
+				battleframe = current_time
+			end
+		elseif battleframe then
+			battleframe = nil
+		end
+	
 		if ctrlstatus and shiftstatus and altstatus and current_time > delayaction then
 			delayaction = current_time + 1
 			Logout();

@@ -19,26 +19,19 @@ Addons with similar functionality you don't need anymore
 - Target WSG FC/Duel request-cancel
 - Drop WSG Flag/Remove Slow Fall Buff
 
-
 **IMPROVED RIGHT CLICK** - Activate this functionality by selecting checkbox from the menu
-
-RIGHT CLICK ON ITEM
+- RIGHT CLICK ON ITEM
   - Drag and Drop Item into Mail, Trade, Auction Window
-
-ALT + RIGHT CLICK ON ITEM
+- ALT + RIGHT CLICK ON ITEM
   - Search Auction House for selected item
 
-
 **SPECIAL KEY COMBINATIONS** - Activate this functionality by selecting checkbox from the menu
-
-CTRL+SHIFT
+- CTRL+SHIFT
   - follow player(if friendly player targeted)
-  
-ALT+SHIFT
+- ALT+SHIFT
   - inspect player
   - bid auction(if auction browse frame is open and item selected)
-  
-ALT+CTRL
+- ALT+CTRL
   - send mail(if item is attached to the mail)
   - create auction(if auction create frame is open and item attached)
   - buy auction(if auction browse frame is open and item selected)

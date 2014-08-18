@@ -41,8 +41,8 @@ Addons with similar functionality you don't need anymore
   - initiate-accept trade(if friendly player targeted)
 
 **EASY SPLIT MERGE** - Activate this functionality by selecting checkbox from the menu
-- press Shift + Right Click on stacked item once to enable splitting mode. Set output number by using alt(inscreae) or ctrl(decrease), press Shift+Right Click to split stack
-- by opening send mail or auction sell window, item splitter will activate itself
+- Press Shift + Right Click on stacked item once to enable splitting mode. Set output number by using alt(inscreae) or ctrl(decrease), press Shift+Right Click to split stack
+- By opening send mail or auction sell window, item splitter will activate itself
 
 **GOSSIP AUTOPROCESSING** - Activate this functionality by selecting checkbox from the menu
 - by pressing Shift + Right Click on NPC it will automatically process single choice dialog windows

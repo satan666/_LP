@@ -13,7 +13,7 @@ Addons with similar functionality you don't need anymore
 
 
 **CONFIGURABLE KEY BINDINGS** - You may bind any function from the list using standard game Key Binding menu
-- Logout
+- Logout(default is alt+shift+ctrl)
 - Reload UI
 - Stuck
 - Target WSG FC/Duel request-cancel

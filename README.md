@@ -20,8 +20,10 @@ CONFIGURABLE KEY BINDINGS - You may bind function from the list key using game K
 - Drop WSG Flag/Remove Slow Fall Buff
 
 IMPROVED RIGHT CLICK - Activate this functionality by selecting checkbox from the menu
+
 **RIGHT CLICK ON ITEM**
   - Drag and Drop Item into Mail, Trade, Auction Window
+
 **ALT + RIGHT CLICK ON ITEM*
   - Search Auction House for selected item
 

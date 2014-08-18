@@ -24,7 +24,7 @@ Addons with similar functionality you don't need anymore
 - Logout(default is alt+shift+ctrl)
 - Reload UI
 - Stuck
-- Target WSG FC/Duel request-cancel
+- Target WSG FC/Duel Request-Cancel
 - Drop WSG Flag/Remove Slow Fall Buff
 
 **SPECIAL KEY COMBINATIONS** - Activate this functionality by selecting checkbox from the menu

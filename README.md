@@ -12,7 +12,7 @@ Addons with similar functionality you don't need anymore
 - Block Salation
 
 
-**CONFIGURABLE KEY BINDINGS** - You may bind any function from the list key using game Key Binding menu
+**CONFIGURABLE KEY BINDINGS** - You may bind any function from the list using standard game Key Binding menu
 - Logout
 - Reload UI
 - Stuck

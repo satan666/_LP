@@ -40,5 +40,16 @@ Addons with similar functionality you don't need anymore
   - confirm pop-up window(select yes button)
   - initiate-accept trade(if friendly player targeted)
 
+**Easy Split Merge** - Activate this functionality by selecting checkbox from the menu
+- press Shift + Right Click on stacked item once to enable splitting mode. Set output number by using alt(inscreae) or ctrl(decrease), press Shift+Right Click to split stack
+- by opening send mail or auction sell window, item splitter will activate itself
+
+**GOSSIP AUTOPROCESSING** - Activate this functionality by selecting checkbox from the menu
+- by pressing Shift + Right Click on NPC it will automatically process single choice dialog windows
+
+**Non Configurable Enhancements** - This functionality is permanently enabled
+- Hold Shift Key while Merchant's window is open(Grey Items Sell/Repair)
+- Hold Shift Key and finish quest once to record steps while interacting with quest NPC(Repeatable Quest Auto-Complete)
+- Hold Alt Key to Pickup/Complete quests(Quest Auto-PickUp/Auto-Complete)
 
 *[Big thanks to mrmr for improving addon's GUI](https://github.com/rsheep)*

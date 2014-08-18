@@ -11,6 +11,7 @@ Addons with similar functionality you don't need anymore
 - Quick Loot
 - Block Salation
 
+## Keybindings and Key Combinations explanation 
 
 **CONFIGURABLE KEY BINDINGS** - You may bind any function from the list using standard game Key Binding menu
 - Logout(default is alt+shift+ctrl)

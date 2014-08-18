@@ -41,5 +41,4 @@ Addons with similar functionality you don't need anymore
   - initiate-accept trade(if friendly player targeted)
 
 
-
-
+Big thanks to mrmr for improving addon's GUI

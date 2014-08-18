@@ -11,7 +11,7 @@ Addons with similar functionality you don't need anymore
 - Quick Loot
 - Block Salvation
 
-## Keybindings and Key Combinations explanation 
+## Keybindings and Key Combinations explained 
 
 
 **IMPROVED RIGHT CLICK** - Activate this functionality by selecting checkbox from the menu

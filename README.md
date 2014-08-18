@@ -9,7 +9,7 @@ Addons with similar functionality you don't need anymore
 - Ez Dismount
 - Automaton
 - Quick Loot
-- Block Salation
+- Block Salvation
 
 ## Keybindings and Key Combinations explanation 
 

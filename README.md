@@ -33,11 +33,11 @@ ALT + RIGHT CLICK ON ITEM
 
 CTRL+SHIFT
   - follow player(if friendly player targeted)
-  - 
+  
 ALT+SHIFT
   - inspect player
   - bid auction(if auction browse frame is open and item selected)
-  - 
+  
 ALT+CTRL
   - send mail(if item is attached to the mail)
   - create auction(if auction create frame is open and item attached)

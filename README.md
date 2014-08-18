@@ -24,7 +24,7 @@ IMPROVED RIGHT CLICK - Activate this functionality by selecting checkbox from th
 **RIGHT CLICK ON ITEM**
   - Drag and Drop Item into Mail, Trade, Auction Window
 
-**ALT + RIGHT CLICK ON ITEM*
+**ALT + RIGHT CLICK ON ITEM**
   - Search Auction House for selected item
 
 SPECIAL KEY COMBINATIONS - Activate this functionality by selecting checkbox from the menu

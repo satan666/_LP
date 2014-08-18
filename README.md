@@ -13,18 +13,19 @@ Addons with similar functionality you don't need anymore
 
 ## Keybindings and Key Combinations explanation 
 
-**CONFIGURABLE KEY BINDINGS** - You may bind any function from the list using standard game Key Binding menu
-- Logout(default is alt+shift+ctrl)
-- Reload UI
-- Stuck
-- Target WSG FC/Duel request-cancel
-- Drop WSG Flag/Remove Slow Fall Buff
 
 **IMPROVED RIGHT CLICK** - Activate this functionality by selecting checkbox from the menu
 - RIGHT CLICK ON ITEM
   - Drag and Drop Item into Mail, Trade, Auction Window
 - ALT + RIGHT CLICK ON ITEM
   - Search Auction House for selected item
+
+**CONFIGURABLE KEY BINDINGS** - You may bind any function from the list using standard game Key Binding menu
+- Logout(default is alt+shift+ctrl)
+- Reload UI
+- Stuck
+- Target WSG FC/Duel request-cancel
+- Drop WSG Flag/Remove Slow Fall Buff
 
 **SPECIAL KEY COMBINATIONS** - Activate this functionality by selecting checkbox from the menu
 - CTRL+SHIFT

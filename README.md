@@ -12,25 +12,28 @@ Addons with similar functionality you don't need anymore
 - Block Salation
 
 
-##CONFIGURABLE KEY BINDINGS - You may bind function from the list key using game Key Binding menu
+###CONFIGURABLE KEY BINDINGS - You may bind function from the list key using game Key Binding menu
 - Logout
 - Reload UI
 - Stuck
 - Target WSG FC/Duel request-cancel
 - Drop WSG Flag/Remove Slow Fall Buff
 
-##IMPROVED RIGHT CLICK - Activate this functionality by selecting checkbox from the menu
+###IMPROVED RIGHT CLICK - Activate this functionality by selecting checkbox from the menu
 **RIGHT CLICK ON ITEM**
   - Drag and Drop Item into Mail, Trade, Auction Window
 **ALT + RIGHT CLICK ON ITEM*
   - Search Auction House for selected item
 
-##SPECIAL KEY COMBINATIONS - Activate this functionality by selecting checkbox from the menu
+###SPECIAL KEY COMBINATIONS - Activate this functionality by selecting checkbox from the menu
+
 **CTRL+SHIFT**
   - follow player(if friendly player targeted)
+
 **ALT+SHIFT**
   - inspect player
   - bid auction(if auction browse frame is open and item selected)
+
 **ALT+CTRL**
   - send mail(if item is attached to the mail)
   - create auction(if auction create frame is open and item attached)

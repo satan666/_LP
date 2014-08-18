@@ -20,7 +20,7 @@ Addons with similar functionality you don't need anymore
 - ALT + RIGHT CLICK ON ITEM
   - Search Auction House for selected item
 
-**CONFIGURABLE KEY BINDINGS** - You may bind any function from the list using standard game Key Binding menu
+**CONFIGURABLE KEY BINDINGS** - You may bind any action from the list below using standard game Key Binding menu
 - Logout(default is alt+shift+ctrl)
 - Reload UI
 - Stuck

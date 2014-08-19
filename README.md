@@ -14,7 +14,7 @@ Addons with similar functionality you don't need anymore
 ## Keybindings and Key Combinations explained 
 
 
-**IMPROVED RIGHT CLICK** - Activate this functionality by selecting checkbox from the menu
+**IMPROVED RIGHT CLICK** - Enable this functionality by selecting checkbox from the menu
 - RIGHT CLICK ON ITEM
   - Drag and Drop Item into Mail, Trade, Auction Window
 - ALT + RIGHT CLICK ON ITEM
@@ -27,7 +27,7 @@ Addons with similar functionality you don't need anymore
 - Target WSG FC/Duel Request-Cancel
 - Drop WSG Flag/Remove Slow Fall Buff
 
-**SPECIAL KEY COMBINATIONS** - Activate this functionality by selecting checkbox from the menu
+**SPECIAL KEY COMBINATIONS** - Enable this functionality by selecting checkbox from the menu
 - CTRL+SHIFT
   - follow player(if friendly player targeted)
 - ALT+SHIFT
@@ -40,11 +40,11 @@ Addons with similar functionality you don't need anymore
   - confirm pop-up window(select yes button)
   - initiate-accept trade(if friendly player targeted)
 
-**EASY SPLIT MERGE** - Activate this functionality by selecting checkbox from the menu
+**EASY SPLIT MERGE** - Enable this functionality by selecting checkbox from the menu
 - Press Shift + Right Click on stacked item once to enable splitting mode. Set output number by using alt(inscreae) or ctrl(decrease). Afterwards press Shift+Right Click to split stack
 - By opening send mail or auction sell window, item splitter will activate itself
 
-**GOSSIP AUTOPROCESSING** - Activate this functionality by selecting checkbox from the menu
+**GOSSIP AUTOPROCESSING** - Enable this functionality by selecting checkbox from the menu
 - by pressing Shift + Right Click on NPC it will automatically process single choice dialog windows
 
 **NON CONFIGURABLE ENHANCEMENTS** - This functionality is permanently enabled

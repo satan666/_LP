@@ -1448,7 +1448,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 			end
 			return
 		
-		elseif LPCONFIG.RIGHT and tradestatus and not IsShiftKeyDown() and not IsAltKeyDown() then
+		elseif LPCONFIG.RIGHT and tradestatus and not IsShiftKeyDown() and not IsAltKeyDown() and LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			--	DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
 			--	return
@@ -1461,7 +1461,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 			end
 			return
 			
-		elseif LPCONFIG.RIGHT and GMailFrame and GMailFrame:IsVisible() and not CursorHasItem() then
+		elseif LPCONFIG.RIGHT and GMailFrame and GMailFrame:IsVisible() and not CursorHasItem() and LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			--	DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
 			--	return
@@ -1483,7 +1483,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 				end
 			end
 		
-		elseif LPCONFIG.RIGHT and CT_MailFrame and CT_MailFrame:IsVisible() and not IsShiftKeyDown() and not IsAltKeyDown() then
+		elseif LPCONFIG.RIGHT and CT_MailFrame and CT_MailFrame:IsVisible() and not IsShiftKeyDown() and not IsAltKeyDown() and LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
 				--DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
 				--return
@@ -1514,7 +1514,7 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 					end
 				end
 			end
-		elseif LPCONFIG.RIGHT and mailstatus and not IsShiftKeyDown() and not IsAltKeyDown() then
+		elseif LPCONFIG.RIGHT and mailstatus and not IsShiftKeyDown() and not IsAltKeyDown() and LazyPig_ItemIsTradeable(ParentID,ItemID) then
 			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
 				--DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
 				--return
@@ -1532,11 +1532,11 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 				end
 				return
 			end	
-		elseif LPCONFIG.RIGHT and auctionstatus and not IsShiftKeyDown() and not IsAltKeyDown() then
-			if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
-				DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
-				return
-			end
+		elseif LPCONFIG.RIGHT and auctionstatus and not IsShiftKeyDown() and not IsAltKeyDown()  and LazyPig_ItemIsTradeable(ParentID,ItemID) then
+			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
+				--DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
+				--return
+			--end
 			if not AuctionFrameAuctions:IsVisible() then
 				AuctionFrameTab3:Click()
 				return
@@ -1547,11 +1547,11 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 				ClearCursor()
 			end
 			return
-		elseif LPCONFIG.RIGHT and auctionstatus and IsAltKeyDown() then
-			if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
-				DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Item is not tradeable", 1, 0.5, 0);
-				return
-			end
+		elseif LPCONFIG.RIGHT and auctionstatus and IsAltKeyDown() and LazyPig_ItemIsTradeable(ParentID,ItemID)then
+			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
+				--DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Item is not tradeable", 1, 0.5, 0);
+				--return
+			--end
 			if not AuctionFrameBrowse:IsVisible() then
 				AuctionFrameTab1:Click()
 				return

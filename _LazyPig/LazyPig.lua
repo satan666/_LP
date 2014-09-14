@@ -1237,7 +1237,7 @@ end
 
 function LazyPig_Dungeon()
 	local t = GetRealZoneText()
-	if t =="Dire Maul" or t =="Stratholme"  or t =="Scholomance" or t =="Blackrock Depths" or t =="Sunken Temple" or t =="The Stockade" or t =="Zul'Farrak" or t =="Scarlet Monastery" or t =="Gnomeregan" or t =="The Deadmines" or t=="Blackfathom Deeps" or t=="Wailing Caverns" or t=="Razorfen Downs" or t=="Razorfen Kraul" then 
+	if t =="Dire Maul" or t =="Stratholme"  or t =="Scholomance" or t =="Blackrock Depths" or t =="Sunken Temple" or t =="The Stockade" or t =="Zul'Farrak" or t =="Scarlet Monastery" or t =="Gnomeregan" or t =="The Deadmines" or t=="Blackfathom Deeps" or t=="Wailing Caverns" or t=="Razorfen Downs" or t=="Razorfen Kraul" or t=="Ragefire Chasm" or t=="Shadowfang Keep" then 
 		return true
 	end
 	return false

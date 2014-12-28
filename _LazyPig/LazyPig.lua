@@ -1449,10 +1449,10 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 			return
 		
 		elseif LPCONFIG.RIGHT and tradestatus and not IsShiftKeyDown() and not IsAltKeyDown() then
-			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
-			--	DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
-			--	return
-			--end
+			if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
+				DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
+				return
+			end
 			PickupContainerItem(ParentID,ItemID)
 			local slot = TradeFrame_GetAvailableSlot()
 			if slot then ClickTradeButton(slot) end
@@ -1462,10 +1462,10 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 			return
 			
 		elseif LPCONFIG.RIGHT and GMailFrame and GMailFrame:IsVisible() and not CursorHasItem() then
-			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
-			--	DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
-			--	return
-			--end
+			if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
+				DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
+				return
+			end
 			local i
 			local bag, item = ParentID,ItemID
 			for i = 1, GMAIL_NUMITEMBUTTONS, 1 do
@@ -1484,10 +1484,10 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 			end
 		
 		elseif LPCONFIG.RIGHT and CT_MailFrame and CT_MailFrame:IsVisible() and not IsShiftKeyDown() and not IsAltKeyDown() then
-			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
-				--DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
-				--return
-			--end
+			if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
+				DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
+				return
+			end
 			local bag, item = ParentID,ItemID
 			if ( ( CT_Mail_GetItemFrame(bag, item) or ( CT_Mail_addItem and CT_Mail_addItem[1] == bag and CT_Mail_addItem[2] == item ) ) and not special ) then
 				return;
@@ -1515,10 +1515,10 @@ function LazyPig_UseContainerItem(ParentID,ItemID)
 				end
 			end
 		elseif LPCONFIG.RIGHT and mailstatus and not IsShiftKeyDown() and not IsAltKeyDown() then
-			--if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
-				--DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
-				--return
-			--end
+			if not LazyPig_ItemIsTradeable(ParentID,ItemID) then
+				DEFAULT_CHAT_FRAME:AddMessage("LazyPig: Cannot attach item", 1, 0.5, 0);
+				return
+			end
 			
 			if InboxFrame and InboxFrame:IsVisible() then
 				MailFrameTab_OnClick(2);

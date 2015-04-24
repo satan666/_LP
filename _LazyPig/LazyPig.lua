@@ -621,7 +621,9 @@ function LazyPig_OnEvent(event)
 		for i=1, getn(GossipOptions) do
 			if GossipOptions[i] == "binder" then
 				local bind = GetBindLocation();
-				if not (bind == GetSubZoneText() or bind == GetZoneText() or bind == GetRealZoneText() or bind == GetMinimapZoneText()) then
+	
+				--if not (bind == GetSubZoneText() or bind == GetZoneText() or bind == GetRealZoneText() or bind == GetMinimapZoneText()) then
+				if bind ~= GetSubZoneText() then
 					gossipbreak = true
 				end	
 			elseif gossipnr then
